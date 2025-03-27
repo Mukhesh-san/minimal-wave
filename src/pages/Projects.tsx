@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Eye, Code, ExternalLink } from 'lucide-react';
+import { toast } from '@/hooks/use-toast';
 
 interface Project {
   id: number;
@@ -9,6 +10,9 @@ interface Project {
   description: string;
   technologies: string[];
   image?: string;
+  demoUrl?: string;
+  codeUrl?: string;
+  liveUrl?: string;
 }
 
 const Projects: React.FC = () => {
@@ -18,30 +22,45 @@ const Projects: React.FC = () => {
       title: 'Minion Eye Tracker',
       description: 'An interactive eye-tracking application that follows cursor movement, designed using WebGL and Three.js.',
       technologies: ['JavaScript', 'WebGL', 'Three.js', 'HTML', 'CSS'],
+      demoUrl: 'https://example.com/minion-eye-tracker',
+      codeUrl: 'https://github.com/mukhesh/minion-eye-tracker',
+      liveUrl: 'https://minion-tracker.example.com',
     },
     {
       id: 2,
       title: 'Digital Clock',
       description: 'A sleek, customizable digital clock application with multiple themes and time formats.',
       technologies: ['JavaScript', 'HTML', 'CSS'],
+      demoUrl: 'https://example.com/digital-clock',
+      codeUrl: 'https://github.com/mukhesh/digital-clock',
+      liveUrl: 'https://digital-clock.example.com',
     },
     {
       id: 3,
       title: 'Snake Game',
       description: 'A modern implementation of the classic Snake game with difficulty levels and score tracking.',
       technologies: ['JavaScript', 'Canvas API', 'HTML', 'CSS'],
+      demoUrl: 'https://example.com/snake-game',
+      codeUrl: 'https://github.com/mukhesh/snake-game',
+      liveUrl: 'https://snake-game.example.com',
     },
     {
       id: 4,
       title: 'Calculator',
       description: 'A feature-rich calculator with standard and scientific calculation modes.',
       technologies: ['JavaScript', 'React', 'HTML', 'CSS'],
+      demoUrl: 'https://example.com/calculator',
+      codeUrl: 'https://github.com/mukhesh/calculator',
+      liveUrl: 'https://calculator.example.com',
     },
     {
       id: 5,
       title: 'Todo List',
       description: 'A minimalist todo application with drag-and-drop functionality, local storage, and filtering options.',
       technologies: ['React', 'JavaScript', 'HTML', 'CSS'],
+      demoUrl: 'https://example.com/todo-list',
+      codeUrl: 'https://github.com/mukhesh/todo-list',
+      liveUrl: 'https://todo-list.example.com',
     },
   ];
 
@@ -62,6 +81,26 @@ const Projects: React.FC = () => {
       y: 0,
       opacity: 1,
       transition: { duration: 0.5 }
+    }
+  };
+
+  const handleClick = (action: string, project: Project) => {
+    // In a real application, these would link to actual project resources
+    if (action === 'demo') {
+      toast({
+        title: `Viewing ${project.title} Demo`,
+        description: "This would open the project demo in a real application.",
+      });
+    } else if (action === 'code') {
+      toast({
+        title: `Viewing ${project.title} Code`,
+        description: "This would open the source code repository in a real application.",
+      });
+    } else if (action === 'live') {
+      toast({
+        title: `Visiting ${project.title}`,
+        description: "This would open the live project in a real application.",
+      });
     }
   };
 
@@ -113,13 +152,25 @@ const Projects: React.FC = () => {
                 </div>
                 
                 <div className="flex items-center pt-4 space-x-3">
-                  <button className="p-2 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors">
+                  <button 
+                    className="p-2 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => handleClick('demo', project)}
+                    aria-label={`View ${project.title} demo`}
+                  >
                     <Eye className="h-5 w-5" />
                   </button>
-                  <button className="p-2 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors">
+                  <button 
+                    className="p-2 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => handleClick('code', project)}
+                    aria-label={`View ${project.title} code`}
+                  >
                     <Code className="h-5 w-5" />
                   </button>
-                  <button className="p-2 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors">
+                  <button 
+                    className="p-2 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => handleClick('live', project)}
+                    aria-label={`View ${project.title} live`}
+                  >
                     <ExternalLink className="h-5 w-5" />
                   </button>
                 </div>
