@@ -9,6 +9,7 @@ interface BlogPost {
   excerpt: string;
   date: string;
   category: string;
+  url: string;
 }
 
 const Blog: React.FC = () => {
@@ -19,6 +20,7 @@ const Blog: React.FC = () => {
       excerpt: 'Learn the fundamentals of React and how to create your first component.',
       date: 'May 12, 2023',
       category: 'Web Development',
+      url: 'https://react.dev/learn',
     },
     {
       id: 2,
@@ -26,6 +28,7 @@ const Blog: React.FC = () => {
       excerpt: 'A beginner-friendly introduction to key machine learning concepts.',
       date: 'June 23, 2023',
       category: 'AI & ML',
+      url: 'https://www.coursera.org/specializations/machine-learning-introduction',
     },
     {
       id: 3,
@@ -33,6 +36,7 @@ const Blog: React.FC = () => {
       excerpt: 'How to create beautiful, responsive interfaces using Tailwind CSS.',
       date: 'July 5, 2023',
       category: 'CSS',
+      url: 'https://tailwindcss.com/docs/responsive-design',
     },
     {
       id: 4,
@@ -40,6 +44,7 @@ const Blog: React.FC = () => {
       excerpt: 'Exploring powerful array methods that make JavaScript coding easier.',
       date: 'August 17, 2023',
       category: 'JavaScript',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array',
     },
   ];
 
@@ -60,6 +65,10 @@ const Blog: React.FC = () => {
       opacity: 1,
       transition: { duration: 0.5 }
     }
+  };
+
+  const handleBlogClick = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -87,10 +96,11 @@ const Blog: React.FC = () => {
           {blogPosts.map((post) => (
             <motion.article 
               key={post.id}
-              className="group border-b border-border pb-8 last:border-0"
+              className="group border-b border-border pb-8 last:border-0 cursor-pointer"
               variants={itemVariants}
+              onClick={() => handleBlogClick(post.url)}
             >
-              <a href="#" className="block space-y-3 hover:no-underline">
+              <div className="block space-y-3 hover:no-underline">
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
                   <span>{post.date}</span>
                   <span className="h-1 w-1 rounded-full bg-muted-foreground"></span>
@@ -110,7 +120,7 @@ const Blog: React.FC = () => {
                 <div className="flex items-center pt-2 text-sm font-medium text-muted-foreground group-hover:text-accent transition-colors">
                   Read more <ArrowRight className="ml-2 h-4 w-4" />
                 </div>
-              </a>
+              </div>
             </motion.article>
           ))}
         </motion.div>

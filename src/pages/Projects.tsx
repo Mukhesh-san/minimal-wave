@@ -3,16 +3,17 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Eye, Code, ExternalLink } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 
 interface Project {
   id: number;
   title: string;
   description: string;
   technologies: string[];
-  image?: string;
-  demoUrl?: string;
-  codeUrl?: string;
-  liveUrl?: string;
+  image: string;
+  demoUrl: string;
+  codeUrl: string;
+  liveUrl: string;
 }
 
 const Projects: React.FC = () => {
@@ -22,45 +23,50 @@ const Projects: React.FC = () => {
       title: 'Minion Eye Tracker',
       description: 'An interactive eye-tracking application that follows cursor movement, designed using WebGL and Three.js.',
       technologies: ['JavaScript', 'WebGL', 'Three.js', 'HTML', 'CSS'],
-      demoUrl: 'https://example.com/minion-eye-tracker',
-      codeUrl: 'https://github.com/mukhesh/minion-eye-tracker',
-      liveUrl: 'https://minion-tracker.example.com',
+      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      demoUrl: 'https://codepen.io/collection/XLebem/',
+      codeUrl: 'https://github.com/topics/eye-tracking',
+      liveUrl: 'https://threejs.org/examples/#webgl_interactive_cubes_gpu',
     },
     {
       id: 2,
       title: 'Digital Clock',
       description: 'A sleek, customizable digital clock application with multiple themes and time formats.',
       technologies: ['JavaScript', 'HTML', 'CSS'],
-      demoUrl: 'https://example.com/digital-clock',
-      codeUrl: 'https://github.com/mukhesh/digital-clock',
-      liveUrl: 'https://digital-clock.example.com',
+      image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      demoUrl: 'https://codepen.io/trending?type=pens&language=javascript',
+      codeUrl: 'https://github.com/topics/digital-clock',
+      liveUrl: 'https://codepen.io/collection/DQvYpQ',
     },
     {
       id: 3,
       title: 'Snake Game',
       description: 'A modern implementation of the classic Snake game with difficulty levels and score tracking.',
       technologies: ['JavaScript', 'Canvas API', 'HTML', 'CSS'],
-      demoUrl: 'https://example.com/snake-game',
-      codeUrl: 'https://github.com/mukhesh/snake-game',
-      liveUrl: 'https://snake-game.example.com',
+      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      demoUrl: 'https://codepen.io/search/pens?q=snake+game',
+      codeUrl: 'https://github.com/topics/snake-game',
+      liveUrl: 'https://playsnake.org/',
     },
     {
       id: 4,
       title: 'Calculator',
       description: 'A feature-rich calculator with standard and scientific calculation modes.',
       technologies: ['JavaScript', 'React', 'HTML', 'CSS'],
-      demoUrl: 'https://example.com/calculator',
-      codeUrl: 'https://github.com/mukhesh/calculator',
-      liveUrl: 'https://calculator.example.com',
+      image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      demoUrl: 'https://codepen.io/search/pens?q=calculator',
+      codeUrl: 'https://github.com/topics/calculator-app',
+      liveUrl: 'https://www.desmos.com/scientific',
     },
     {
       id: 5,
       title: 'Todo List',
       description: 'A minimalist todo application with drag-and-drop functionality, local storage, and filtering options.',
       technologies: ['React', 'JavaScript', 'HTML', 'CSS'],
-      demoUrl: 'https://example.com/todo-list',
-      codeUrl: 'https://github.com/mukhesh/todo-list',
-      liveUrl: 'https://todo-list.example.com',
+      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      demoUrl: 'https://codepen.io/search/pens?q=todo+app',
+      codeUrl: 'https://github.com/topics/todo-app',
+      liveUrl: 'https://todoist.com/',
     },
   ];
 
@@ -84,22 +90,13 @@ const Projects: React.FC = () => {
     }
   };
 
-  const handleClick = (action: string, project: Project) => {
-    // In a real application, these would link to actual project resources
-    if (action === 'demo') {
+  const handleClick = (url: string, action: string, project: Project) => {
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } else {
       toast({
-        title: `Viewing ${project.title} Demo`,
-        description: "This would open the project demo in a real application.",
-      });
-    } else if (action === 'code') {
-      toast({
-        title: `Viewing ${project.title} Code`,
-        description: "This would open the source code repository in a real application.",
-      });
-    } else if (action === 'live') {
-      toast({
-        title: `Visiting ${project.title}`,
-        description: "This would open the live project in a real application.",
+        title: `${action} link unavailable`,
+        description: `The ${action.toLowerCase()} for ${project.title} is not available yet.`,
       });
     }
   };
@@ -129,11 +126,18 @@ const Projects: React.FC = () => {
           {projects.map((project) => (
             <motion.div 
               key={project.id}
-              className="group relative border border-border rounded-lg overflow-hidden hover:border-accent transition-colors duration-300"
+              className="group relative border border-border rounded-lg overflow-hidden hover:border-accent transition-colors duration-300 h-full"
               variants={itemVariants}
             >
-              <div className="aspect-video bg-secondary flex items-center justify-center">
-                <span className="text-6xl opacity-20">0{project.id}</span>
+              <div 
+                className="aspect-video bg-secondary relative overflow-hidden"
+              >
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               
               <div className="p-6 space-y-4">
@@ -154,21 +158,21 @@ const Projects: React.FC = () => {
                 <div className="flex items-center pt-4 space-x-3">
                   <button 
                     className="p-2 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors"
-                    onClick={() => handleClick('demo', project)}
+                    onClick={() => handleClick(project.demoUrl, 'Demo', project)}
                     aria-label={`View ${project.title} demo`}
                   >
                     <Eye className="h-5 w-5" />
                   </button>
                   <button 
                     className="p-2 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors"
-                    onClick={() => handleClick('code', project)}
+                    onClick={() => handleClick(project.codeUrl, 'Code', project)}
                     aria-label={`View ${project.title} code`}
                   >
                     <Code className="h-5 w-5" />
                   </button>
                   <button 
                     className="p-2 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors"
-                    onClick={() => handleClick('live', project)}
+                    onClick={() => handleClick(project.liveUrl, 'Live', project)}
                     aria-label={`View ${project.title} live`}
                   >
                     <ExternalLink className="h-5 w-5" />
