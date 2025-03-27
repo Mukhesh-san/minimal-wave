@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, GitHub, Linkedin, Send } from 'lucide-react';
+import { Mail, Github, Linkedin, Send } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -61,7 +60,7 @@ const Contact: React.FC = () => {
               
               <div className="flex items-center space-x-3">
                 <div className="p-3 rounded-full bg-secondary">
-                  <GitHub className="h-5 w-5" />
+                  <Github className="h-5 w-5" />
                 </div>
                 <span>github.com/mukhesh</span>
               </div>
