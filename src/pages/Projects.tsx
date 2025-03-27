@@ -1,13 +1,13 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Eye, Code, ExternalLink } from 'lucide-react';
-import { toast } from '@/hooks/use-toast';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { toast } from '@/hooks/use-toast';
 import TodoApp from '@/components/TodoApp';
 import CalculatorApp from '@/components/CalculatorApp';
 import SnakeGameApp from '@/components/SnakeGameApp';
 import DigitalClockApp from '@/components/DigitalClockApp';
+import MinionEyeTrackerApp from '@/components/MinionEyeTrackerApp';
 
 interface Project {
   id: number;
@@ -25,17 +25,17 @@ const Projects: React.FC = () => {
     {
       id: 1,
       title: 'Minion Eye Tracker',
-      description: 'An interactive eye-tracking application that follows cursor movement, designed using WebGL and Three.js.',
-      technologies: ['JavaScript', 'WebGL', 'Three.js', 'HTML', 'CSS'],
-      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
-      component: <div className="p-4 text-center text-muted-foreground">Eye tracking demo would appear here.</div>
+      description: 'An interactive eye-tracking application that follows cursor movement, designed using CSS and React.',
+      technologies: ['JavaScript', 'CSS', 'React', 'Tailwind'],
+      image: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      component: <MinionEyeTrackerApp />
     },
     {
       id: 2,
       title: 'Digital Clock',
       description: 'A sleek, customizable digital clock application with multiple themes and time formats.',
       technologies: ['JavaScript', 'HTML', 'CSS', 'React'],
-      image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1584717601196-53d790035df3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
       component: <DigitalClockApp />
     },
     {
@@ -43,7 +43,7 @@ const Projects: React.FC = () => {
       title: 'Snake Game',
       description: 'A modern implementation of the classic Snake game with difficulty levels and score tracking.',
       technologies: ['JavaScript', 'Canvas API', 'HTML', 'CSS', 'React'],
-      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1553481187-be93c21490a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
       component: <SnakeGameApp />
     },
     {
@@ -51,7 +51,7 @@ const Projects: React.FC = () => {
       title: 'Calculator',
       description: 'A feature-rich calculator with standard calculation modes.',
       technologies: ['JavaScript', 'React', 'HTML', 'CSS'],
-      image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1587145820266-a5951ee6f620?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
       component: <CalculatorApp />
     },
     {
@@ -59,7 +59,7 @@ const Projects: React.FC = () => {
       title: 'Todo List',
       description: 'A minimalist todo application with local storage and filtering options.',
       technologies: ['React', 'JavaScript', 'HTML', 'CSS'],
-      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1540350394557-8d14678e7f91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
       component: <TodoApp />
     },
   ];
@@ -135,24 +135,12 @@ const Projects: React.FC = () => {
                   <CardContent className="p-4 pt-2 pb-4">
                     {project.component}
                   </CardContent>
-                  <CardFooter className="p-4 pt-0 border-t flex justify-between">
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <span 
-                          key={tech}
-                          className="px-2 py-1 text-xs rounded-full bg-secondary/80 text-secondary-foreground"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    <button 
-                      onClick={() => setActiveProject(null)}
-                      className="text-sm text-muted-foreground hover:text-foreground"
-                    >
-                      Close
-                    </button>
-                  </CardFooter>
+                  <button 
+                    onClick={() => setActiveProject(null)}
+                    className="absolute top-2 right-2 p-1 rounded-full bg-secondary hover:bg-secondary/80 text-xs"
+                  >
+                    Close
+                  </button>
                 </Card>
               ) : (
                 <>

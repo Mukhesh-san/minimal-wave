@@ -5,7 +5,7 @@ import { toast } from '@/hooks/use-toast';
 
 const GRID_SIZE = 15;
 const CELL_SIZE = 20;
-const INITIAL_SPEED = 150;
+const INITIAL_SPEED = 200; // Reduced speed (increased delay)
 
 type Direction = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
 type Position = { x: number; y: number };
